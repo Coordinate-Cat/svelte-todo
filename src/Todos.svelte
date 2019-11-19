@@ -101,19 +101,8 @@
 <div class="container">
 
     <h2>Svelte Todo アプリ</h2>
-    <input type="text" class="todo-input" placeholder="Insert todo item ..." bind:value={newTodoTitle} on:keydown={addTodo} >
 
-    {#each filteredTodos as todo}
-        <div class="todo-item">
-            <TodoItem {...todo} on:deleteTodo={handleDeleteTodo} on:toggleComplete={handleToggleComplete} />
-        </div>
-    {/each}
-
-    <div class="inner-container">
-        <div><label><input class="inner-container-input" type="checkbox" on:change={checkAllTodos}>Check All</label></div>
-        <div>{todosRemaining} items left</div>
-    </div>
-
+    <!-- ページ切り替え -->
     <div class="inner-container">
         <div>
             <button on:click={() => updateFilter('all')} class:active="{currentFilter === 'all'}">All</button>
@@ -123,6 +112,22 @@
         <dir>
             <button on:click={clearCompleted}>Clear Completed</button>
         </dir>
+    </div>
+
+    <!-- 追加 -->
+    <input type="text" class="todo-input" placeholder="Insert todo item ..." bind:value={newTodoTitle} on:keydown={addTodo} >
+
+    <!-- Todoの表示 -->
+    {#each filteredTodos as todo}
+        <div class="todo-item">
+            <TodoItem {...todo} on:deleteTodo={handleDeleteTodo} on:toggleComplete={handleToggleComplete} />
+        </div>
+    {/each}
+
+    <!-- 全て選択とTodoの総数 -->
+    <div class="inner-container">
+        <div><label><input class="inner-container-input" type="checkbox" on:change={checkAllTodos}>Check All</label></div>
+        <div>{todosRemaining} items left</div>
     </div>
 
 </div>
